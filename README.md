@@ -26,7 +26,7 @@
 | 주차(날짜) | 스터디 내용 |
 | --|--|
 | 1주차 (~2023.07.09) | - 처음 해보는 사람들은 튜토리얼은 일단 해오기 <br>- 코드랩 & 워크샵 : Good for beginners 파트까지 해오기<br> - digging, nullsafety → 같이|
-|   |   |
+| 2주차 (~2023.07.16)  | - 시간이 있으면 [튜토리얼](https://docs.flutter.dev/reference/tutorials)의 Adding Interactivity, 시간이 없으면 어드밴스드 [이링크가 맞는지](https://dartpad.dev/?id=e7076b40fb17a0fa899f9f7a154a02e8)  |
 |   |   |
 |   |   |
 |   |   |
