@@ -29,19 +29,35 @@ class MyApp extends StatelessWidget {
 
 class MyAppState extends ChangeNotifier {
   var current = WordPair.random();
+  final history = <WordPair>[];
+
+  GlobalKey? historyListKey;
+
   void getNext() {
+    history.insert(0, current);
+    var animatedList = historyListKey?.currentState as AnimatedListState?;
+    animatedList?.insertItem(
+      0,
+      // duration: Duration(milliseconds: 500)
+    );
     current = WordPair.random();
     notifyListeners();
   }
 
   var favorites = <WordPair>[];
 
-  void toggleFavorite() {
+  void toggleFavorite([WordPair? pair]) {
+    pair ??= current;
     if (favorites.contains(current)) {
       favorites.remove(current);
     } else {
       favorites.add(current);
     }
+    notifyListeners();
+  }
+
+  void removeFavotite(WordPair pair) {
+    favorites.remove(pair);
     notifyListeners();
   }
 }
@@ -53,6 +69,7 @@ class MyHomePage extends StatefulWidget {
 
 class _MyHomePageState extends State<MyHomePage> {
   var selectedIndex = 0;
+
   @override
   Widget build(BuildContext context) {
     Widget page = selectedIndex == 0
@@ -60,41 +77,65 @@ class _MyHomePageState extends State<MyHomePage> {
         : selectedIndex == 1
             ? FavoritesPage()
             : throw UnimplementedError('no widget for $selectedIndex');
+    var colorScheme = Theme.of(context).colorScheme;
 
-    return LayoutBuilder(builder: (context, constraints) {
-      return Scaffold(
-        body: Row(
-          children: [
+    var mainArea = ColoredBox(
+        color: colorScheme.surfaceVariant,
+        child: AnimatedSwitcher(
+            duration: Duration(microseconds: 200), child: page));
+
+    return Scaffold(
+      body: LayoutBuilder(builder: (context, constraints) {
+        if (constraints.maxWidth >= 450) {
+          return Row(
+            children: [
+              SafeArea(
+                child: NavigationRail(
+                  extended: constraints.maxWidth >= 600,
+                  destinations: [
+                    NavigationRailDestination(
+                      icon: Icon(Icons.home),
+                      label: Text('Home'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.favorite),
+                      label: Text('Favorites'),
+                    ),
+                  ],
+                  selectedIndex: selectedIndex,
+                  onDestinationSelected: (value) {
+                    setState(() {
+                      selectedIndex = value;
+                    });
+                  },
+                ),
+              ),
+              Expanded(
+                child: mainArea,
+              ),
+            ],
+          );
+        } else {
+          return Column(children: [
+            Expanded(child: mainArea),
             SafeArea(
-              child: NavigationRail(
-                extended: constraints.maxWidth >= 600,
-                destinations: [
-                  NavigationRailDestination(
-                    icon: Icon(Icons.home),
-                    label: Text('Home'),
-                  ),
-                  NavigationRailDestination(
-                    icon: Icon(Icons.favorite),
-                    label: Text('Favorites'),
-                  ),
-                ],
-                selectedIndex: selectedIndex,
-                onDestinationSelected: (value) {
-                  setState(() {
-                    selectedIndex = value;
-                  });
-                },
-              ),
-            ),
-            Expanded(
-              child: Container(
-                color: Theme.of(context).colorScheme.primaryContainer,
-                child: page,
-              ),
-            ),
-          ],
-        ),
-      );
-    });
+              child: BottomNavigationBar(
+                  items: [
+                    BottomNavigationBarItem(
+                        icon: Icon(Icons.home), label: 'Home'),
+                    BottomNavigationBarItem(
+                        icon: Icon(Icons.favorite), label: 'Favorites'),
+                  ],
+                  currentIndex: selectedIndex,
+                  onTap: (value) {
+                    setState(() {
+                      selectedIndex = value;
+                    });
+                  }),
+            )
+          ]);
+        }
+      }),
+    );
   }
 }
