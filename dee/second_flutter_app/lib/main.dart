@@ -41,11 +41,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
           /*3*/
-          Icon(
-            Icons.star,
-            color: Colors.red[500],
-          ),
-          const Text('41'),
+          const FavoriteWidget(),
         ],
       ),
     );
@@ -117,4 +113,58 @@ class MyApp extends StatelessWidget {
       ],
     );
   }
+}
+
+// 고유의 상태를 관리하기 때문에 createState()를 오버라이드해서
+// State 오브젝트를 생성함.  
+class FavoriteWidget extends StatefulWidget {
+  const FavoriteWidget({super.key});
+
+  @override
+  State<FavoriteWidget> createState() => _FavoriteWidgetState();
+}
+
+// 생애 주기 동안 바뀔 수 있는 데이터를 저장하는 클래스 
+class _FavoriteWidgetState extends State<FavoriteWidget> {
+  bool _isFavorited = true;
+  int _favoriteCount = 41;
+
+  @override
+  Widget build(BuildContext context) {
+    return Row(
+      mainAxisSize: MainAxisSize.min,
+      children: [
+        Container(
+          padding: const EdgeInsets.all(0),
+          child: IconButton(
+            padding: const EdgeInsets.all(0),
+            alignment: Alignment.centerRight,
+            icon: (_isFavorited
+                ? const Icon(Icons.star)
+                : const Icon(Icons.star_border)),
+            color: Colors.red[500],
+            onPressed: _toggleFavorite,
+          ),
+        ),
+        SizedBox(
+          width: 18,
+          child: SizedBox(
+            child: Text('$_favoriteCount'),
+          ),
+        ),
+      ],
+    );
+  }
+
+  void _toggleFavorite() {
+  setState(() {
+    if (_isFavorited) {
+      _favoriteCount -= 1;
+      _isFavorited = false;
+    } else {
+      _favoriteCount += 1;
+      _isFavorited = true;
+    }
+  });
+}
 }
