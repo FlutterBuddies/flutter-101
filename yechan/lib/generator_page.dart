@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'history_list_view.dart';
 import 'word_card.dart';
 import 'main.dart';
 
@@ -8,8 +9,6 @@ class GeneratorPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var appState = context.watch<MyAppState>();
-    // Q: 에엥 MyAppState 형식의 객체를 watch 한다고? 만약 MyAppState 형식의 객체가 여러개라면?
-
     var pair = appState.current;
 
     IconData icon;
@@ -23,7 +22,11 @@ class GeneratorPage extends StatelessWidget {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Text('a random Uniquegood idea:'),
+          Expanded(
+            flex: 3,
+            child: HistoryListView(),
+          ),
+          SizedBox(height: 8),
           WordCard(pair: pair),
           SizedBox(height: 24),
           Row(
@@ -45,6 +48,7 @@ class GeneratorPage extends StatelessWidget {
               ),
             ],
           ),
+          Spacer(flex: 2),
         ],
       ),
     );

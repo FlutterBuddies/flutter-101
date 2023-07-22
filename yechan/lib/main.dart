@@ -32,22 +32,38 @@ class MyApp extends StatelessWidget {
 
 class MyAppState extends ChangeNotifier {
   var current = WordPair.random();
-  // Q: 그냥 선언하면 public이 되는건가? 아래서 바로 접근하네
+  var history = <WordPair>[];
+
+  GlobalKey? historyListKey;
 
   void getNext() {
+    history.insert(0, current);
+
+    var animatedList = historyListKey?.currentState as AnimatedListState?;
+    animatedList?.insertItem(0);
+    // Q: 0번째에 넣는 건 뭐지?
+
     current = WordPair.random();
     notifyListeners();
   }
 
   var favorites = <WordPair>[];
-  // Q: 왜 흔한 문법 대로 WordPair[] 대신 <WordPair>[]를 썼을까?
 
-  void toggleFavorite() {
-    if (favorites.contains(current)) {
-      favorites.remove(current);
+  void toggleFavorite([WordPair? pair]) {
+    // Q: 대괄호로 묶인 건 왜지? 무슨 문법이지
+    // S: 찾아보니 옵셔널, 그리고 순서가 있는 파라미터에 대한 문법인듯
+    pair = pair ?? current;
+
+    if (favorites.contains(pair)) {
+      favorites.remove(pair);
     } else {
-      favorites.add(current);
+      favorites.add(pair);
     }
+    notifyListeners();
+  }
+
+  void removeFavorite(WordPair pair) {
+    favorites.remove(pair);
     notifyListeners();
   }
 }

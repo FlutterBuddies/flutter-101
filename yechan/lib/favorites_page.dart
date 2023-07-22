@@ -6,6 +6,7 @@ import 'main.dart';
 class FavoritesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    var theme = Theme.of(context);
     final appState = context.watch<MyAppState>();
 
     return Padding(
@@ -21,7 +22,15 @@ class FavoritesPage extends StatelessWidget {
                     padding: const EdgeInsets.fromLTRB(12, 8, 12, 8),
                     child: Row(
                       children: [
-                        Icon(Icons.star, color: Color(0xFFFFD000)),
+                        IconButton(
+                          onPressed: () {
+                            appState.removeFavorite(item);
+                          },
+                          icon: Icon(
+                            Icons.star,
+                            color: Color(0xFFFFD000),
+                          ),
+                        ),
                         SizedBox(width: 8),
                         Text(item.asLowerCase),
                       ],

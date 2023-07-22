@@ -9,13 +9,12 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-  // Q: 아 언더바가 앞에 붙으면 private인가보네
-
   int selectedIndex = 0;
-  // dart의 문법은 c#이랑 비슷한가..? var이면 자동으로 타입 추론이 되는듯
 
   @override
   Widget build(BuildContext context) {
+    var colorScheme = Theme.of(context).colorScheme;
+
     Widget page;
     switch (selectedIndex) {
       case 0:
@@ -28,42 +27,80 @@ class _MyHomePageState extends State<MyHomePage> {
         throw UnimplementedError('no widget');
     }
 
-    return LayoutBuilder(builder: (context, constraints) {
-      return Scaffold(
-        // Q: Scaffold는 뭘까..?
-        // I: 대충 보니 Material Design 레이아웃 잡는거네. 나중에 앱바나 드로워메뉴 등이 확장 가능한듯?
-        body: Row(
-          children: [
+    var mainArea = ColoredBox(
+      color: colorScheme.surfaceVariant,
+      child: AnimatedSwitcher(
+          duration: Duration(milliseconds: 200),
+          child: page,
+          transitionBuilder: (child, animation) {
+            return SlideTransition(
+                // A: Transition으로 자동완성 목록 보니 여러 트랜지션이 나오는데, SlideTransition이 괜찮아보여서 선택, Co-pilot이 생성자 내용 작성해줌
+                position: Tween<Offset>(begin: Offset(1, 0), end: Offset(0, 0))
+                    .animate(animation),
+                child: child);
+          }),
+    );
+
+    return Scaffold(
+      body: LayoutBuilder(builder: (context, constraints) {
+        if (constraints.maxWidth < 450) {
+          return Column(children: [
+            Expanded(child: mainArea),
             SafeArea(
-              child: NavigationRail(
-                extended: constraints.maxWidth >= 800,
-                destinations: [
-                  NavigationRailDestination(
+              child: BottomNavigationBar(
+                items: [
+                  BottomNavigationBarItem(
                     icon: Icon(Icons.home),
-                    label: Text('Home'),
+                    label: 'Home',
                   ),
-                  NavigationRailDestination(
+                  BottomNavigationBarItem(
                     icon: Icon(Icons.star),
-                    label: Text('Favorites'),
+                    label: 'Favorites',
                   ),
                 ],
-                selectedIndex: selectedIndex,
-                onDestinationSelected: (value) {
+                currentIndex: selectedIndex,
+                onTap: (value) {
                   setState(() {
                     selectedIndex = value;
                   });
                 },
               ),
-            ),
-            Expanded(
-              child: Container(
-                color: Theme.of(context).colorScheme.primaryContainer,
-                child: page,
+            )
+          ]);
+        } else {
+          return Row(
+            children: [
+              SafeArea(
+                child: NavigationRail(
+                  extended: constraints.maxWidth >= 800,
+                  destinations: [
+                    NavigationRailDestination(
+                      icon: Icon(Icons.home),
+                      label: Text('Home'),
+                    ),
+                    NavigationRailDestination(
+                      icon: Icon(Icons.star),
+                      label: Text('Favorites'),
+                    ),
+                  ],
+                  selectedIndex: selectedIndex,
+                  onDestinationSelected: (value) {
+                    setState(() {
+                      selectedIndex = value;
+                    });
+                  },
+                ),
               ),
-            ),
-          ],
-        ),
-      );
-    });
+              Expanded(
+                child: Container(
+                  color: Theme.of(context).colorScheme.primaryContainer,
+                  child: mainArea,
+                ),
+              ),
+            ],
+          );
+        }
+      }),
+    );
   }
 }
