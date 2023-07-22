@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/services.dart';
-import './pages/CupertinoStoreHomePage.dart';
+import './pages/home_page.dart';
 
 class CupertinoStoreApp extends StatelessWidget {
   const CupertinoStoreApp({super.key});
