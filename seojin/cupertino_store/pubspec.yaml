@@ -1,14 +1,15 @@
 name: cupertino_store
 description: The first Flutter project.
 
-publish_to: "none"
+publish_to: 'none'
 
 version: 0.0.0+1 # change version
 
 environment:
-  sdk: ">=2.19.4 <4.0.0" # change environment sdk version
+  sdk: '>=2.19.4 <4.0.0' # change environment sdk version
 
 dependencies:
+  cupertino_icons: ^1.0.5
   flutter:
     sdk: flutter
 
