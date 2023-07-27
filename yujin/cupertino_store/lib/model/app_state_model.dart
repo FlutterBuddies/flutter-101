@@ -16,6 +16,10 @@ class AppStateModel extends foundation.ChangeNotifier {
   // The IDs and quantities of products currently in the cart.
   final _productsInCart = <int, int>{};
 
+  bool isFetching = true;
+  bool isFetchingSucceeded = false;
+  bool isFetchingError = false;
+
   Map<int, int> get productsInCart {
     return Map.from(_productsInCart);
   }
@@ -115,8 +119,19 @@ class AppStateModel extends foundation.ChangeNotifier {
 
   // Loads the list of available products from the repo.
   void loadProducts() async {
-    _availableProducts = await ProductsRepository.loadProducts(Category.all);
+    isFetching = true;
     notifyListeners();
+
+    try {
+      _availableProducts = await ProductsRepository.loadProducts(Category.all);
+      isFetchingSucceeded = true;
+      isFetchingError = isFetching = false;
+    } catch (_) {
+      isFetchingError = true;
+      isFetchingSucceeded = isFetching = false;
+    } finally {
+      notifyListeners();
+    }
   }
 
   void setCategory(Category newCategory) {
