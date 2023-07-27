@@ -40,6 +40,7 @@ dependencies:
   shrine_images: ^2.0.2
   cloud_firestore: ^4.8.4
   firebase_core: ^2.15.0
+  flutter_dotenv: ^5.1.0
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +65,7 @@ flutter:
   uses-material-design: true
 
   assets:
+    - .env
     - packages/shrine_images/0-0.jpg
     - packages/shrine_images/1-0.jpg
     - packages/shrine_images/2-0.jpg
