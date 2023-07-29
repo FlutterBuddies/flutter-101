@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import 'product.dart';
 
 class ProductsRepository {
@@ -270,8 +272,21 @@ class ProductsRepository {
     ),
   ];
 
-  static List<Product> loadProducts(Category category) => switch (category) {
-        Category.all => _allProducts,
-        _ => _allProducts.where((p) => p.category == category).toList(),
-      };
+  static Future<List<Product>> loadProducts(Category category) async {
+    final db = FirebaseFirestore.instance;
+    db.collection("products").get().then(
+      (querySnapshot) {
+        print("Successfully completed");
+        for (var docSnapshot in querySnapshot.docs) {
+          print('${docSnapshot.id} => ${docSnapshot.data()}');
+        }
+      },
+      onError: (e) => print("Error completing: $e"),
+    );
+
+    return switch (category) {
+      Category.all => _allProducts,
+      _ => _allProducts.where((p) => p.category == category).toList(),
+    };
+  }
 }
