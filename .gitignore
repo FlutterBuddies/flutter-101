@@ -66,3 +66,14 @@ lib/generated_plugin_registrant.dart
 !/packages/flutter_tools/test/data/dart_dependencies_test/**/.packages
 
 # End of https://www.toptal.com/developers/gitignore/api/flutter
+.DS_Store
+dee/fourth_haiku/ios/Runner/Assets.xcassets
+dee/fourth_haiku/windows
+dee/fourth_haiku/web
+dee/fourth_haiku/test
+dee/fourth_haiku/macos/Runner.xcodeproj
+dee/fourth_haiku/macos/Runner.xcworkspace
+dee/fourth_haiku/macos
+dee/fourth_haiku/linux
+dee/fourth_haiku/ios
+dee/fourth_haiku/android
