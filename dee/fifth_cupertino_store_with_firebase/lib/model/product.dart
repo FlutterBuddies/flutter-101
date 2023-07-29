@@ -6,6 +6,7 @@ enum Category {
 }
 
 class Product {
+  
   const Product({
     required this.category, 
     required this.id,
@@ -13,6 +14,13 @@ class Product {
     required this.name,
     required this.price,
   });
+
+  // Product.fromSnapshot(Map<String, dynamic> snapshot)
+  //     : category = snapshot['category'],
+  //       id = snapshot['id'],
+  //       isFeatured = snapshot['isFeatured'],
+  //       name = snapshot['name'],
+  //       price = snapshot['price'];
 
   final Category category;
   final int id;
@@ -25,4 +33,6 @@ class Product {
 
   @override
   String toString() => '$name (id=$id)';
+
+  
 }

@@ -1,6 +1,7 @@
 import 'package:flutter/foundation.dart' as foundation;
 
 import 'product.dart';
+
 import 'products_repository.dart';
 
 double _salesTaxRate = 0.06;
@@ -89,7 +90,7 @@ void clearCart() {
 
 // Loads the list of available products from the repo.
 void loadProducts() {
-  _availableProducts = ProductsRepository.loadProducts(Category.all);
+  _availableProducts = ProductsRepository.loadProducts(Category.all); // 나는 여기서 로드 프로덕트를 해야됨 
   notifyListeners();
 }
 
