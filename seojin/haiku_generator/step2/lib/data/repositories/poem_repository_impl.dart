@@ -12,7 +12,7 @@ class PoemRepositoryImpl implements PoemRepository {
   Future<String> getPoems(String productName) async {
     const haikuCount = 5;
 
-    final apiKey = dotenv.env['YOUR_API_KEY']!;
+    final apiKey = dotenv.env['API_KEY']!;
     final url = Uri.parse(
         'https://generativelanguage.googleapis.com/v1beta1/models/chat-bison-001:generateMessage?key=$apiKey');
     final headers = {'Content-Type': 'application/json'};
