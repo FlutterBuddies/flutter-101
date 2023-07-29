@@ -1,11 +1,11 @@
 import 'package:codelab_101/favorites_page.dart';
 import 'package:codelab_101/generator_page.dart';
 import 'package:english_words/english_words.dart';
-import 'package:flutter/material.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(CupertinoStoreApp());
 }
 
 class MyApp extends StatelessWidget {
