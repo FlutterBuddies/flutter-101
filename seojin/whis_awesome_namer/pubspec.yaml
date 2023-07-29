@@ -1,0 +1,25 @@
+name: whis_awesome_namer
+description: The first Flutter project.
+
+publish_to: "none"
+
+version: 0.0.0+1 # change version
+
+environment:
+  sdk: ">=2.19.4 <4.0.0" # change environment sdk version
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  english_words: ^4.0.0 # add dependency
+  provider: ^6.0.0 # add dependency
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+  flutter_lints: ^2.0.0
+
+flutter:
+  uses-material-design: true
