@@ -25,10 +25,13 @@ class ProductListTab extends StatelessWidget {
                 child: CupertinoListSection(
                   topMargin: 0,
                   children: [
-                    for (var product in products)
-                      ProductRowItem(
-                        product: product,
-                      )
+                    if (products.isNotEmpty)
+                      for (var product in products)
+                        ProductRowItem(
+                          product: product,
+                        )
+                    else
+                      const Text('No products found'),
                   ],
                 ),
               ),
