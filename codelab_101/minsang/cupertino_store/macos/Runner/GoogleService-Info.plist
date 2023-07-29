@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>145019199715-4k0ajhhl6imag85p4h4e1e4a740u956p.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.145019199715-4k0ajhhl6imag85p4h4e1e4a740u956p</string>
+	<key>API_KEY</key>
+	<string>AIzaSyD_lNJ_C0ip70_MLsvJ2Ftz11HSWffRxVM</string>
+	<key>GCM_SENDER_ID</key>
+	<string>145019199715</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.example.cupertinoStore.RunnerTests</string>
+	<key>PROJECT_ID</key>
+	<string>flutter-codelab-cupertino</string>
+	<key>STORAGE_BUCKET</key>
+	<string>flutter-codelab-cupertino.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:145019199715:ios:c631e8bf4498d00d00a5d6</string>
+	<key>DATABASE_URL</key>
+	<string>https://flutter-codelab-cupertino-default-rtdb.asia-southeast1.firebasedatabase.app</string>
+</dict>
+</plist>

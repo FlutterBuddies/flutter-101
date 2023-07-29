@@ -17,10 +17,7 @@ import 'package:flutter/foundation.dart'
 class DefaultFirebaseOptions {
   static FirebaseOptions get currentPlatform {
     if (kIsWeb) {
-      throw UnsupportedError(
-        'DefaultFirebaseOptions have not been configured for web - '
-        'you can reconfigure this by running the FlutterFire CLI again.',
-      );
+      return web;
     }
     switch (defaultTargetPlatform) {
       case TargetPlatform.android:
@@ -31,10 +28,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.iOS:
         return ios;
       case TargetPlatform.macOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for macos - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return macos;
       case TargetPlatform.windows:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for windows - '
@@ -52,14 +46,35 @@ class DefaultFirebaseOptions {
     }
   }
 
+  static const FirebaseOptions web = FirebaseOptions(
+    apiKey: 'AIzaSyAF_bRaPkCOxwEfEnIFRZSvi-LS6vgqJfY',
+    appId: '1:145019199715:web:ed9e64703fa6f99300a5d6',
+    messagingSenderId: '145019199715',
+    projectId: 'flutter-codelab-cupertino',
+    authDomain: 'flutter-codelab-cupertino.firebaseapp.com',
+    databaseURL: 'https://flutter-codelab-cupertino-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'flutter-codelab-cupertino.appspot.com',
+  );
+
   static const FirebaseOptions ios = FirebaseOptions(
     apiKey: 'AIzaSyD_lNJ_C0ip70_MLsvJ2Ftz11HSWffRxVM',
     appId: '1:145019199715:ios:44e6cc1e3e91ba5d00a5d6',
     messagingSenderId: '145019199715',
     projectId: 'flutter-codelab-cupertino',
+    databaseURL: 'https://flutter-codelab-cupertino-default-rtdb.asia-southeast1.firebasedatabase.app',
     storageBucket: 'flutter-codelab-cupertino.appspot.com',
-    iosClientId:
-        '145019199715-uis91vqgklq8a98knms9dmqmt87q4lbk.apps.googleusercontent.com',
+    iosClientId: '145019199715-uis91vqgklq8a98knms9dmqmt87q4lbk.apps.googleusercontent.com',
     iosBundleId: 'com.example.cupertinoStore',
+  );
+
+  static const FirebaseOptions macos = FirebaseOptions(
+    apiKey: 'AIzaSyD_lNJ_C0ip70_MLsvJ2Ftz11HSWffRxVM',
+    appId: '1:145019199715:ios:c631e8bf4498d00d00a5d6',
+    messagingSenderId: '145019199715',
+    projectId: 'flutter-codelab-cupertino',
+    databaseURL: 'https://flutter-codelab-cupertino-default-rtdb.asia-southeast1.firebasedatabase.app',
+    storageBucket: 'flutter-codelab-cupertino.appspot.com',
+    iosClientId: '145019199715-4k0ajhhl6imag85p4h4e1e4a740u956p.apps.googleusercontent.com',
+    iosBundleId: 'com.example.cupertinoStore.RunnerTests',
   );
 }

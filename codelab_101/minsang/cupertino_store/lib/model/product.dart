@@ -25,4 +25,15 @@ class Product {
 
   @override
   String toString() => '$name (id=$id)';
+
+  static fromDocs(Map<String, dynamic> docs) {
+    print("asdfasdf $docs");
+    return Product(
+      category: Category.values.byName(docs['category']),
+      id: docs['id'],
+      isFeatured: docs['isFeatured'],
+      name: docs['name'],
+      price: docs['price'],
+    );
+  }
 }

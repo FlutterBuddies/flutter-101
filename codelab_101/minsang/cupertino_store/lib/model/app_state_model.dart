@@ -1,7 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cupertino_store/model/products_repository.dart';
 import 'package:flutter/foundation.dart' as foundation;
 
 import 'product.dart';
-import 'products_repository.dart';
+// import 'products_repository.dart';
+import 'package:firebase_core_web/firebase_core_web.dart';
 
 double _salesTaxRate = 0.06;
 double _shippingCostPerItem = 7;
