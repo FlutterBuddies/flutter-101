@@ -5,7 +5,9 @@ import 'package:yechan_store/model/app_state_model.dart';
 import 'app.dart';
 import 'firebase_options.dart';
 
-Future<void> main() async {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
