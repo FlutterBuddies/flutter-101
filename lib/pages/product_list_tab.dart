@@ -29,7 +29,18 @@ class _ProductListTabState extends State<ProductListTab> {
             }
 
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return const Text("Loading");
+              return const Center(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CupertinoActivityIndicator(
+                      radius: 20.0
+                    ),
+                    SizedBox(height: 20),
+                    Text("Loading...")
+                  ],
+                ),
+              );
             }
 
             return CustomScrollView(
