@@ -58,7 +58,8 @@ class DefaultFirebaseOptions {
     messagingSenderId: '145019199715',
     projectId: 'flutter-codelab-cupertino',
     storageBucket: 'flutter-codelab-cupertino.appspot.com',
-    iosClientId: '145019199715-uis91vqgklq8a98knms9dmqmt87q4lbk.apps.googleusercontent.com',
+    iosClientId:
+        '145019199715-uis91vqgklq8a98knms9dmqmt87q4lbk.apps.googleusercontent.com',
     iosBundleId: 'com.example.cupertinoStore',
   );
 }

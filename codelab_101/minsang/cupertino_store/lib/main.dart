@@ -3,8 +3,13 @@ import 'package:provider/provider.dart';
 
 import 'app.dart';
 import 'model/app_state_model.dart';
+import 'firebase_options.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+void main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   return runApp(
     ChangeNotifierProvider<AppStateModel>(
       create: (_) => AppStateModel()..loadProducts(),
