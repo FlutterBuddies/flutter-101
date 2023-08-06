@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'model/app_state_model.dart';
@@ -53,7 +54,11 @@ class _SearchTabState extends State<SearchTab> {
   @override
   Widget build(BuildContext context) {
     final model = Provider.of<AppStateModel>(context);
+
     final results = model.search(_terms);
+    final isFetching = model.isFetching;
+    final isFetchingSucceeded = model.isFetchingSucceeded;
+    final isFetchingError = model.isFetchingError;
 
     return DecoratedBox(
       decoration: const BoxDecoration(
@@ -68,17 +73,25 @@ class _SearchTabState extends State<SearchTab> {
                 child: CupertinoListSection(
                   topMargin: 0,
                   children: [
-                    if (results.isNotEmpty)
+                    if (isFetchingSucceeded && results.isNotEmpty)
                       for (var product in results)
                         ProductRowItem(
                           product: product,
                         )
+                    else if (isFetchingError)
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        child: Text('Fetching Error'),
+                      )
+                    else if (isFetching)
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        child: CircularProgressIndicator(),
+                      )
                     else
-                      const SafeArea(
-                        child: Padding(
-                          padding: EdgeInsets.all(8.0),
-                          child: Text('No Data'),
-                        ),
+                      const Padding(
+                        padding: EdgeInsets.symmetric(vertical: 20),
+                        child: Text('No Data'),
                       ),
                   ],
                 ),
